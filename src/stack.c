@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "stack.h"
 
 #define MAX_STACK_SIZE 10
@@ -55,15 +54,14 @@ STACK_RETURN init_stack(StackType* sp, int max_size) {
   sp->stack = NULL;
 
   // allocate space for the array
-  sp->stack = malloc(sizeof(StackItem) * max_size);
+  sp->stack = calloc(max_size, sizeof(StackItem));
   if (sp->stack == NULL) {
-    printf("malloc error on array\n");
+    printf("calloc error on array\n");
     return -1; 
   }
 
   sp->capacity = max_size;
   sp->top = 0;
-  memset(sp->stack, 0, sizeof(StackItem) * max_size);
 
   return STACK_OK;
 }
